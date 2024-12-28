@@ -18,10 +18,10 @@ def is_report_safe(report, dampen_results=False):
             # index makes the result safe
             # Try removing the two indexs which caused the first attempt to fail
             # and the first two incase it's because of the starting gradient
+            # It's possible that the failing indexes include the first two,
+            # so using a set reduces them to only the unique ones
             first_failing_index, second_failing_index = result
-            indexes_to_try_removing = set(
-                [first_failing_index, second_failing_index, 0, 1]
-            )
+            indexes_to_try_removing = {first_failing_index, second_failing_index, 0, 1}
             for index in indexes_to_try_removing:
                 if is_report_safe_without_index(report, index):
                     safe = True
