@@ -1,15 +1,11 @@
-list_1 = []
-list_2 = []
+import util
+import argparse
 
-with open("part_1_input.txt", "r") as file:
-    input_pairs = file.readlines()
-    for input_pair in input_pairs:
-        entry_1, entry_2 = input_pair.split(maxsplit=2)
-        list_1.append(int(entry_1))
-        list_2.append(int(entry_2))
+parser = argparse.ArgumentParser()
+parser.add_argument("-f", "--file")
+args = parser.parse_args()
 
-list_1.sort()
-list_2.sort()
+list_1, list_2 = util.parse_file(args.file)
 
 sorted_pairs = zip(list_1, list_2)
 total = 0
