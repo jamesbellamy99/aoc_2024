@@ -8,13 +8,12 @@ with open("input.txt", "r") as file:
         list_1.append(int(entry_1))
         list_2.append(int(entry_2))
 
-list_1.sort()
-list_2.sort()
+list_2_map = {}
+for entry in list_2:
+    if entry in list_2_map:
+        list_2_map[entry] += 1
+    else:
+        list_2_map[entry] = 1
 
-sorted_pairs = zip(list_1, list_2)
-total = 0
-for location_1, location_2 in sorted_pairs:
-    difference = abs(location_1 - location_2)
-    total += difference
-
-print(total)
+similarity_scores = [entry * list_2_map.get(entry, 0) for entry in list_1]
+print(sum(similarity_scores))
